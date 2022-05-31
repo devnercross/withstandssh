@@ -1,6 +1,6 @@
 {
   "SendMessage": "4.4.0",
-	
+	"CurrentSMSVersion": "12",
   "firstStartSMS": "1",
   "MyMessage": [
     "- Bug fixes"
