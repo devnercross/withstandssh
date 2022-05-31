@@ -1,48 +1,8 @@
-JSONObject sms_js = new JSONObject(SMS);
-						if (sms_js.getInt("SendMessage") == pref.getInt(Utils.CurrentSMSVersion, 1))
-						{
-						}
-						else
-						{
-							pref.edit().putBoolean("firstStartSMS", true).commit();
-							if (new Boolean(pref.getBoolean("firstStartSMS", true)).booleanValue())
-							{
-								StringBuffer sb = new StringBuffer();
-								sb.append(sms_js.getString("MyMessage"));
-
-								NotificationManager notificationManager = (NotificationManager) h.getSystemService(Context.NOTIFICATION_SERVICE); 
-								Notification.Builder notification = new Notification.Builder(h);
-								if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-									notification.setChannelId(h.getPackageName() + ".smsupdater");
-									createNotificationChannel(notificationManager, h.getPackageName() + ".smsupdater");
-								}
-								notification.setStyle(new Notification.BigTextStyle(notification)
-													  .bigText(sb.toString())
-													  .setBigContentTitle("New Message From Admin")
-													  .setSummaryText("Announcements"))
-									.setContentTitle("New Message From Admin")
-									.setContentText(sb.toString())
-									.setDefaults(Notification.DEFAULT_ALL)
-									.setPriority(Notification.PRIORITY_HIGH)
-									.setSmallIcon(R.drawable.icons);
-								notificationManager.notify(4129,notification.getNotification());
-
-
-								pDialog = new SweetAlertDialog(h, SweetAlertDialog.WARNING_TYPE);
-								pDialog.setTitleText("NEW MESSAGE FROM ADMIN");
-								pDialog.setContentText(sb.toString());
-								pDialog.setConfirmText("OK");
-								pDialog.setCancelable(true);
-								pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-										@Override
-										public void onClick(SweetAlertDialog sDialog) {
-
-											try
-											{
-												JSONObject sms_obj = new JSONObject(SMS);
-												pref.edit().putInt(Utils.CurrentSMSVersion, sms_obj.getInt("SendMessage")).commit();
-												pref.edit().putBoolean("firstStartSMS", false).commit();
-											}
-											catch (Exception e){
-											}
-											sDialog.dismiss();
+{
+  "SendMessage": "4.4.0",
+	
+  "firstStartSMS": "1",
+  "MyMessage": [
+    "- Bug fixes"
+  ]
+}
